@@ -7,11 +7,11 @@ public class Main {
         MalhaAerea malha = new MalhaAerea(100);// Definindo capacidade inicial de 100 aeroportos
 
         // Aeroportos Iniciais
-        malha.cadastrarAeroporto("Belo Horizonte", "88");
-        malha.cadastrarAeroporto("Brasília", "67");
-        malha.cadastrarAeroporto("Rio de Janeiro", "51");
-        malha.cadastrarAeroporto("Salvador", "10");
-        malha.cadastrarAeroporto("São Paulo", "95");
+        malha.cadastrarAeroporto("Belo Horizonte",88);
+        malha.cadastrarAeroporto("Brasília", 67);
+        malha.cadastrarAeroporto("Rio de Janeiro", 51);
+        malha.cadastrarAeroporto("Salvador", 10);
+        malha.cadastrarAeroporto("São Paulo", 95);
 
         while (true) {
             System.out.println("\n==== Menu de Opções ====");
@@ -26,19 +26,20 @@ public class Main {
             int opcao = scanner.nextInt();
             scanner.nextLine(); 
             switch (opcao) {
+                
                 case 1:
                     System.out.print("Nome do aeroporto: ");
                     String nome = scanner.nextLine();
                     System.out.print("Código do aeroporto: ");
-                    String codigo = scanner.nextLine();
+                    int codigo = scanner.nextInt();
                     malha.cadastrarAeroporto(nome, codigo);
                     System.out.println("Aeroporto cadastrado com sucesso.");
                     break;
                 case 2:
                     System.out.print("Código do aeroporto de origem: ");
-                    String origem = scanner.nextLine();
+                    int origem = scanner.nextInt();
                     System.out.print("Código do aeroporto de destino: ");
-                    String destino = scanner.nextLine();
+                    int destino = scanner.nextInt();
                     System.out.print("Número do voo: ");
                     int numeroVoo = scanner.nextInt();
                     malha.cadastrarVoo(origem, destino, numeroVoo);
@@ -46,7 +47,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.print("Código do aeroporto de origem: ");
-                    origem = scanner.nextLine();
+                    origem = scanner.nextInt();
                     System.out.print("Número do voo: ");
                     numeroVoo = scanner.nextInt();
                     malha.removerVoo(origem, numeroVoo);
@@ -54,14 +55,14 @@ public class Main {
                     break;
                 case 4:
                     System.out.print("Código do aeroporto de origem: ");
-                    origem = scanner.nextLine();
+                    origem = scanner.nextInt();
                     malha.listarVoos(origem);
                     break;
                 case 5:
                     System.out.print("Código do aeroporto de origem: ");
-                    origem = scanner.nextLine();
+                    origem = scanner.nextInt();
                     System.out.print("Código do aeroporto de destino: ");
-                    destino = scanner.nextLine();
+                    destino = scanner.nextInt();
                     malha.listarTrajetos(origem, destino);
                     break;
                 case 6:
