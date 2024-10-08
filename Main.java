@@ -9,9 +9,11 @@ public class Main {
             grafo.adicionarAeroporto("SP", "88");
             grafo.adicionarAeroporto("RJ", "71");
             grafo.adicionarAeroporto("MG", "66");
+            grafo.adicionarAeroporto("GO", "55");
             grafo.adicionarVoo("88", "71", 1);
             grafo.adicionarVoo("71", "66", 2);
-            grafo.adicionarVoo("66", "88", 3);
+            grafo.adicionarVoo("66", "55", 3);
+            grafo.adicionarVoo("55", "66", 4);
         } catch (Exception e) {
             System.out.println("Erro ao inicializar aeroportos e voos: " + e.getMessage());
         }
@@ -19,12 +21,12 @@ public class Main {
         while (true) {
             System.out.println("\n=======MENU=======");
             System.out.println("1. Adicionar aeroporto"); //
-            System.out.println("2. Adicionar voo");
-            System.out.println("3. Remover voo");
+            System.out.println("2. Adicionar voo"); //
+            System.out.println("3. Remover voo"); //
             System.out.println("4. Listar aeroportos"); //
             System.out.println("5. Listar voos de um aeroporto"); //
-            System.out.println("6. Listar trajetos entre aeroportos"); // Nova opção
-            System.out.println("7. Sair");
+            System.out.println("6. Listar trajetos entre aeroportos"); //
+            System.out.println("7. Sair"); //
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();  // Consome a nova linha

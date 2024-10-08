@@ -1,5 +1,5 @@
 public class Grafo {
-    private ListaEncadeada<Aeroporto> listaAeroportos;
+    private ListaEncadeada<Aeroporto> listaAeroportos; //armazena
 
     public Grafo() {
         this.listaAeroportos = new ListaEncadeada<>();
@@ -15,7 +15,7 @@ public class Grafo {
         listaAeroportos.adicionar(new Aeroporto(nome, codigo));
     }
 
-    //adiciona VOO entre dois aeroportos 
+    //adiciona voo entre dois aeroportos 
     public void adicionarVoo(String codigoOrigem, String codigoDestino, int numeroVoo) throws Exception {
         Aeroporto origem = encontrarAeroporto(codigoOrigem);
         if (origem == null) {
@@ -24,7 +24,7 @@ public class Grafo {
         if (numeroVoo <= 0) {
             throw new Exception("Número do voo inválido.");
         }
-        origem.getListaVoos().adicionar(new Voo(codigoDestino, numeroVoo)); // Corrigido para usar codigoDestino
+        origem.getListaVoos().adicionar(new Voo(codigoDestino, numeroVoo));
     }
 
     public void removerVoo(String codigoOrigem, int numeroVoo) throws Exception {
