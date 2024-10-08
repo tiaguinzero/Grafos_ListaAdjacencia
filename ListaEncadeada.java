@@ -1,34 +1,26 @@
-public class ListaEncadeada {
-    public No inicio; // Alterado para public
+public class ListaEncadeada<T> {
+    public No<T> inicio;
 
     // Classe interna para representar os nós da lista encadeada
-    public class No { // Alterado para public
-        Aeroporto aeroporto; // Para aeroportos
-        Voo voo;             // Para voos
-        No proximo;
+    public static class No<T> {
+        T dado;
+        No<T> proximo;
 
-        // Construtor para aeroportos
-        public No(Aeroporto aeroporto) {
-            this.aeroporto = aeroporto;
-            this.proximo = null;
-        }
-
-        // Construtor para voos
-        public No(Voo voo) {
-            this.voo = voo;
+        // Construtor para nós genéricos
+        public No(T dado) {
+            this.dado = dado;
             this.proximo = null;
         }
     }
 
-    // Método para adicionar um aeroporto à lista encadeada
-    public void adicionarAeroporto(String nome, String codigo) {
-        Aeroporto novoAeroporto = new Aeroporto(nome, codigo);
-        No novoNo = new No(novoAeroporto);
-        
+    // Método para adicionar um elemento à lista encadeada
+    public void adicionar(T dado) {
+        No<T> novoNo = new No<>(dado);
+
         if (inicio == null) {
             inicio = novoNo;
         } else {
-            No atual = inicio;
+            No<T> atual = inicio;
             while (atual.proximo != null) {
                 atual = atual.proximo;
             }
@@ -36,15 +28,15 @@ public class ListaEncadeada {
         }
     }
 
-    // Método para remover um aeroporto da lista
-    public void removerAeroporto(String codigo) {
+    // Método para remover um elemento da lista
+    public void remover(T dado) {
         if (inicio == null) return;
 
-        if (inicio.aeroporto.getCodigo().equals(codigo)) {
+        if (inicio.dado.equals(dado)) {
             inicio = inicio.proximo;
         } else {
-            No atual = inicio;
-            while (atual.proximo != null && !atual.proximo.aeroporto.getCodigo().equals(codigo)) {
+            No<T> atual = inicio;
+            while (atual.proximo != null && !atual.proximo.dado.equals(dado)) {
                 atual = atual.proximo;
             }
             if (atual.proximo != null) {
@@ -53,54 +45,16 @@ public class ListaEncadeada {
         }
     }
 
-    // Método para listar todos os aeroportos
-    public void listarAeroportos() {
-        No atual = inicio;
+    // Método para listar todos os elementos da lista
+    public void listar() {
+        No<T> atual = inicio;
         while (atual != null) {
-            System.out.println("Aeroporto: " + atual.aeroporto.getNome() + " (" + atual.aeroporto.getCodigo() + ")");
+            System.out.println(atual.dado.toString());
             atual = atual.proximo;
         }
     }
-
-    // Método para adicionar um voo à lista encadeada
-    public void adicionarVoo(int destino, int numeroVoo) {
-        Voo novoVoo = new Voo(destino, numeroVoo);
-        No novoNo = new No(novoVoo);
-        
-        if (inicio == null) {
-            inicio = novoNo;
-        } else {
-            No atual = inicio;
-            while (atual.proximo != null) {
-                atual = atual.proximo;
-            }
-            atual.proximo = novoNo;
-        }
+    public No<T> getInicio() {
+        return inicio;
     }
 
-    // Método para remover um voo da lista baseado no número do voo
-    public void removerVoo(int numeroVoo) {
-        if (inicio == null) return;
-
-        if (inicio.voo.getNumeroVoo() == numeroVoo) {
-            inicio = inicio.proximo;
-        } else {
-            No atual = inicio;
-            while (atual.proximo != null && atual.proximo.voo.getNumeroVoo() != numeroVoo) {
-                atual = atual.proximo;
-            }
-            if (atual.proximo != null) {
-                atual.proximo = atual.proximo.proximo;
-            }
-        }
-    }
-
-    // Método para listar todos os voos
-    public void listarVoos() {
-        No atual = inicio;
-        while (atual != null) {
-            System.out.println("Voo: " + atual.voo.getNumeroVoo() + ", Destino: " + atual.voo.getDestino());
-            atual = atual.proximo;
-        }
-    }
 }

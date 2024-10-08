@@ -2,133 +2,105 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Grafo grafo = new Grafo();
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
+        Grafo grafo = new Grafo();
 
-        while (running) {
-            System.out.println("\n===== Sistema de Gerenciamento de Malha Aérea =====");
-            System.out.println("1. Adicionar Aeroporto"); //* 
-            System.out.println("2. Adicionar Voo"); //* 
-            System.out.println("3. Remover Voo"); //* 
-            System.out.println("4. Listar Voos de um Aeroporto");
-            System.out.println("5. Listar Todos os Aeroportos"); //*
-            System.out.println("6. Listar Trajetos (Diretos e Indiretos) entre dois Aeroportos");
+        try {
+            grafo.adicionarAeroporto("SP", "88");
+            grafo.adicionarAeroporto("RJ", "71");
+            grafo.adicionarAeroporto("MG", "66");
+            grafo.adicionarVoo("88", "71", 1);
+            grafo.adicionarVoo("71", "66", 2);
+            grafo.adicionarVoo("66", "88", 3);
+        } catch (Exception e) {
+            System.out.println("Erro ao inicializar aeroportos e voos: " + e.getMessage());
+        }
+
+        while (true) {
+            System.out.println("\n=======MENU=======");
+            System.out.println("1. Adicionar aeroporto"); //
+            System.out.println("2. Adicionar voo");
+            System.out.println("3. Remover voo");
+            System.out.println("4. Listar aeroportos"); //
+            System.out.println("5. Listar voos de um aeroporto"); //
+            System.out.println("6. Listar trajetos entre aeroportos"); // Nova opção
             System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir nova linha
+            scanner.nextLine();  // Consome a nova linha
 
-            switch (opcao) {
-                case 1:
-                    adicionarAeroporto(grafo, scanner);
-                    break;
-                case 2:
-                    adicionarVoo(grafo, scanner);
-                    break;
-                case 3:
-                    removerVoo(grafo, scanner);
-                    break;
-                case 4:
-                    listarVoos(grafo, scanner);
-                    break;
-                case 5:
-                    listarTodosAeroportos(grafo);
-                    break;
-                case 6:
-                    listarTrajetos(grafo, scanner);
-                    break;
-                case 7:
-                    running = false;
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-                    break;
+            try {
+                switch (opcao) {
+                    case 1:
+                        System.out.print("Digite o nome do aeroporto: ");
+                        String nome = scanner.nextLine();
+                        System.out.print("Digite o código do aeroporto: ");
+                        String codigo = scanner.nextLine();
+                        grafo.adicionarAeroporto(nome, codigo);
+                        System.out.println("Aeroporto adicionado com sucesso!");
+                        break;
+                    case 2:
+                        System.out.print("Digite o código do aeroporto de origem: ");
+                        String codigoOrigem = scanner.nextLine();
+                        System.out.print("Digite o código do aeroporto de destino: ");
+                        String codigoDestino = scanner.nextLine();
+                        System.out.print("Digite o número do voo: ");
+                        int numeroVoo = scanner.nextInt();
+                        grafo.adicionarVoo(codigoOrigem, codigoDestino, numeroVoo);
+                        System.out.println("Voo adicionado com sucesso!");
+                        break;
+
+                    case 3:
+                        System.out.print("Digite o código do aeroporto de origem: ");
+                        String codigoOrigemRemover = scanner.nextLine();
+                        System.out.print("Digite o número do voo a ser removido: ");
+                        int numeroVooRemover = scanner.nextInt();
+                        
+                        try {
+                            grafo.removerVoo(codigoOrigemRemover, numeroVooRemover);
+                            System.out.println("Voo removido com sucesso!");
+                        } catch (Exception e) {
+                            System.out.println("Erro ao remover voo: " + e.getMessage());
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("Lista de aeroportos:");
+                        grafo.listarAeroportos();  // Chama o método listarAeroportos no grafo
+                        break;
+
+                    case 5:
+                        System.out.print("Digite o código do aeroporto: ");
+                        String codigoListar = scanner.nextLine();
+                        Aeroporto aeroportoListar = grafo.encontrarAeroporto(codigoListar);
+                        if (aeroportoListar != null) {
+                            System.out.println("Voos do aeroporto " + aeroportoListar.getNome() + ":");
+                            // Exiba os voos
+                            aeroportoListar.getListaVoos().listar();
+                        } else {
+                            System.out.println("Aeroporto não encontrado.");
+                        }
+                        break;
+
+                    case 6:
+                        System.out.print("Digite o código do aeroporto de origem: ");
+                        String codigoTrajetoOrigem = scanner.nextLine();
+                        System.out.print("Digite o código do aeroporto de destino: ");
+                        String codigoTrajetoDestino = scanner.nextLine();
+                        grafo.listarTrajetos(codigoTrajetoOrigem, codigoTrajetoDestino);
+                        break;
+
+                    case 7:
+                        System.out.println("Saindo...");
+                        scanner.close();
+                        System.exit(0);
+
+                    default:
+                        System.out.println("Opção inválida.");
+                }
+            } catch (Exception e) {
+                System.out.println("Erro: " + e.getMessage());
             }
-        }
-
-        scanner.close();
-    }
-
-    // Função para adicionar um aeroporto
-    private static void adicionarAeroporto(Grafo grafo, Scanner scanner) {
-        System.out.print("Digite o nome do aeroporto: ");
-        String nome = scanner.nextLine();
-        System.out.print("Digite o código do aeroporto: ");
-        String codigo = scanner.nextLine();
-        
-        try {
-            grafo.adicionarAeroporto(nome, codigo);
-            System.out.println("Aeroporto " + nome + " adicionado com sucesso.");
-        } catch (Exception e) {
-            System.out.println("Erro ao adicionar aeroporto: " + e.getMessage());
-        }
-    }
-
-    // Função para adicionar um voo
-    private static void adicionarVoo(Grafo grafo, Scanner scanner) {
-        System.out.print("Digite o código do aeroporto de origem: ");
-        String origem = scanner.nextLine();
-        System.out.print("Digite o código do aeroporto de destino: ");
-        String destino = scanner.nextLine();
-        System.out.print("Digite o número do voo: ");
-        int numeroVoo = scanner.nextInt();
-        scanner.nextLine(); // Consumir nova linha
-        
-        try {
-            grafo.adicionarVoo(origem, destino, numeroVoo);
-            System.out.println("Voo adicionado com sucesso.");
-        } catch (Exception e) {
-            System.out.println("Erro ao adicionar voo: " + e.getMessage());
-        }
-    }
-
-    // Função para remover um voo
-    private static void removerVoo(Grafo grafo, Scanner scanner) {
-        System.out.print("Digite o código do aeroporto de origem: ");
-        String origem = scanner.nextLine();
-        System.out.print("Digite o número do voo a ser removido: ");
-        int numeroVoo = scanner.nextInt();
-        scanner.nextLine(); // Consumir nova linha
-        
-        try {
-            grafo.removerVoo(origem, numeroVoo);
-            System.out.println("Voo removido com sucesso.");
-        } catch (Exception e) {
-            System.out.println("Erro ao remover voo: " + e.getMessage());
-        }
-    }
-
-    // Função para listar voos de um aeroporto
-    private static void listarVoos(Grafo grafo, Scanner scanner) {
-        System.out.print("Digite o código do aeroporto: ");
-        String codigo = scanner.nextLine();
-        
-        try {
-            grafo.listarVoos(codigo);
-        } catch (Exception e) {
-            System.out.println("Erro ao listar voos: " + e.getMessage());
-        }
-    }
-
-    // Função para listar todos os aeroportos
-    private static void listarTodosAeroportos(Grafo grafo) {
-        System.out.println("Lista de todos os aeroportos:");
-        grafo.listarTodosAeroportos();
-    }
-
-    // Função para listar trajetos diretos e indiretos entre aeroportos
-    private static void listarTrajetos(Grafo grafo, Scanner scanner) {
-        System.out.print("Digite o código do aeroporto de origem: ");
-        String origem = scanner.nextLine();
-        System.out.print("Digite o código do aeroporto de destino: ");
-        String destino = scanner.nextLine();
-        
-        try {
-            grafo.listarTrajetos(origem, destino);
-        } catch (Exception e) {
-            System.out.println("Erro ao buscar trajetos: " + e.getMessage());
         }
     }
 }

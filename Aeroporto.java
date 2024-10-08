@@ -1,12 +1,12 @@
 public class Aeroporto {
     private String nome;
     private String codigo;
-    private ListaEncadeada listaVoos;
+    private ListaEncadeada<Voo> listaVoos;
 
     public Aeroporto(String nome, String codigo) {
         this.nome = nome;
         this.codigo = codigo;
-        this.listaVoos = new ListaEncadeada();
+        this.listaVoos = new ListaEncadeada<>();
     }
 
     public String getNome() {
@@ -17,7 +17,12 @@ public class Aeroporto {
         return codigo;
     }
 
-    public ListaEncadeada getListaVoos() {
+    public ListaEncadeada<Voo> getListaVoos() {
         return listaVoos;
+    }
+
+    @Override
+    public String toString() {
+        return "Aeroporto: " + nome + " (" + codigo + ")";
     }
 }

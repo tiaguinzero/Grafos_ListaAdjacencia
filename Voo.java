@@ -1,17 +1,22 @@
 public class Voo {
-    private int destino;   // Índice do aeroporto de destino
+    private String destino;   // Índice do aeroporto de destino
     private int numeroVoo; // Número do voo
 
-    public Voo(int destino, int numeroVoo) {
+    public Voo(String destino, int numeroVoo) {
         this.destino = destino;
         this.numeroVoo = numeroVoo;
     }
 
-    public int getDestino() {
+    public String getDestino() {
         return destino;
     }
 
     public int getNumeroVoo() {
         return numeroVoo;
+    }
+
+    @Override
+    public String toString() {
+        return "Voo: " + numeroVoo + ", Destino: " + destino;
     }
 }
