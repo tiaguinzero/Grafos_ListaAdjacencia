@@ -1,11 +1,17 @@
-class Voo {
-    int indiceDestino;  // Índice do aeroporto destino
-    int numeroVoo;  // Número do voo
-    Voo proximo;  // Próximo voo na lista encadeada
+public class Voo {
+    private int destino;   // Índice do aeroporto de destino
+    private int numeroVoo; // Número do voo
 
-    public Voo(int indiceDestino, int numeroVoo) {
-        this.indiceDestino = indiceDestino;
+    public Voo(int destino, int numeroVoo) {
+        this.destino = destino;
         this.numeroVoo = numeroVoo;
-        this.proximo = null;
+    }
+
+    public int getDestino() {
+        return destino;
+    }
+
+    public int getNumeroVoo() {
+        return numeroVoo;
     }
 }
