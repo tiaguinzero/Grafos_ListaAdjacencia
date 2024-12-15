@@ -4,15 +4,14 @@
 Este é um projeto desenvolvido em **Java** que utiliza a estrutura de dados **Grafos** com listas de adjacência para gerenciar voos e aeroportos. O programa oferece um menu interativo para adicionar e remover voos, listar aeroportos e trajetos, proporcionando uma solução eficiente para o gerenciamento de rotas aéreas.
 
 ## Funcionalidades
-| Opção do Menu | Descrição                                     |
-|-------------------|-------------------------------------------------|
-| **1**             | Adicionar um novo aeroporto                    |
-| **2**             | Adicionar um novo voo                          |
-| **3**             | Remover um voo existente                       |
-| **4**             | Listar todos os aeroportos                     |
-| **5**             | Listar todos os voos de um aeroporto           |
-| **6**             | Listar trajetos entre dois aeroportos          |
-| **7**             | Encerrar o programa                            |
+| Opção do Menu                              | Descrição                                           |
+|--------------------------------------------|-----------------------------------------------------|
+| **1** Adicionar um novo aeroporto          | Cria um novo aeroporto na malha aérea.              |
+| **2** Adicionar um novo voo                | Adiciona um novo voo entre dois aeroportos.         |
+| **3** Remover um voo existente             | Remove um voo específico entre dois aeroportos.     |
+| **4** Listar todos os aeroportos           | Exibe todos os aeroportos na malha aérea.           |
+| **5** Listar todos os voos de um aeroporto | Exibe todos os voos registrados de um aeroporto.    |
+| **6** Listar trajetos entre dois aeroportos| Exibe os Voos diretos ou não entre dois aeroportos. |
 
 ## Tecnologias Utilizadas
 - **Java**
