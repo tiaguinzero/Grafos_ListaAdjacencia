@@ -19,7 +19,7 @@ public class Main {
         }
 
         while (true) {
-            System.out.println("\n=======MENU=======");
+            System.out.println("\n=== Sistema de Gerenciamento de Voos ===");
             System.out.println("1. Adicionar aeroporto"); //
             System.out.println("2. Adicionar voo"); //
             System.out.println("3. Remover voo"); //
